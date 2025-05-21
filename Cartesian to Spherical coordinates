@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.linalg as la
+from scipy.special import sph_harm
+
+ligands = np.array([
+    [-0.83533, -1.37452,  1.52230],
+    [-0.83533, -1.37452, -1.52230],
+    [-1.59046,  1.37893, -1.52230],
+    [-1.59046,  1.37893,  1.52230],
+    [ 1.01344,  0.62558,  2.22720],
+    [ 2.23727, -0.50498,  0.00000],
+    [ 1.01344,  0.62558, -2.22720],
+    [ 0.54474,  2.24847,  0.00000]
+])
+
+def cartesian_to_spherical(x, y, z):
+    r = np.sqrt(x**2 + y**2 + z**2)
+    theta = np.arccos(z / r)
+    phi = np.arctan2(y, x)    
+    return r, theta, phi
+    
+
+spherical_coords = np.array([cartesian_to_spherical(*lig) for lig in ligands])
+print (spherical_coords)
